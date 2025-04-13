@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Versets Bibliques</title>
+    <link rel="stylesheet" href="/style.css">
+    <style>
+        /* Styles principaux */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #e4f9f5, #30cfd0);
+            color: #333;
+        }
+
+        header {
+            background-color: #1abc9c;
+            padding: 15px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        nav {
+            background: #1abc9c;
+            padding: 10px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        nav ul li a:hover {
+            background: white;
+            color: #1abc9c;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        h2 {
+            color: #1abc9c;
+            margin-bottom: 20px;
+        }
+
+        .search-box {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .search-box input {
+            width: 100%;
+            max-width: 600px;
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #1abc9c;
+            border-radius: 5px;
+            outline: none;
+            transition: border 0.3s, box-shadow 0.3s;
+        }
+
+        .search-box input:focus {
+            border-color: #16a085;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .verset {
+            background: #ffffff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .verset:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .verset h3 {
+            margin: 0;
+            color: #1abc9c;
+        }
+
+        .verset p {
+            font-size: 15px;
+            color: #666;
+        }
+
+        footer {
+            background: #1abc9c;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Versets Bibliques</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="/">Accueil</a></li>
+            <li><a href="/about">À propos</a></li>
+            <li><a href="/preachings">Prédications</a></li>
+            <li><a href="/versets">Versets Bibliques</a></li>
+            <li><a href="/contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h2>Versets Bibliques</h2>
+
+        <!-- Champ de recherche -->
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Rechercher un verset" oninput="searchVersets()" aria-label="Recherche de versets">
+        </div>
+
+        <!-- Conteneur des versets -->
+        <div id="versetList">
+            <!-- Les versets seront insérés ici par JavaScript -->
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 - Ton site d'évangélisation</p>
+    </footer>
+
+    <script>
+        // Charger les versets depuis le fichier JSON
+        fetch('/bible-fixed.json') // Assurez-vous que le fichier JSON est accessible
+            .then(response => response.json())
+            .then(verses => {
+                const versetList = document.getElementById('versetList');
+                versetList.innerHTML = ''; // Nettoyer la liste
+
+                verses.forEach(verset => {
+                    const div = document.createElement('div');
+                    div.className = 'verset';
+                    div.innerHTML = `
+                        <h3>${verset.book} ${verset.chapter}:${verset.verse}</h3>
+                        <p>${verset.text}</p>
+                    `;
+                    versetList.appendChild(div);
+                });
+            })
+            .catch(error => {
+                console.error('Erreur lors du chargement des versets :', error);
+                document.getElementById('versetList').textContent = 'Impossible de charger les versets.';
+            });
+
+        // Filtrer les versets en fonction de la recherche
+        function searchVersets() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const versets = document.querySelectorAll('.verset');
+
+            versets.forEach(verset => {
+                const title = verset.querySelector('h3').innerText.toLowerCase();
+                const text = verset.querySelector('p').innerText.toLowerCase();
+
+                if (title.includes(input) || text.includes(input)) {
+                    verset.style.display = "block";
+                } else {
+                    verset.style.display = "none";
+                }
+            });
+        }
+    </script>
+</body>
+</html>

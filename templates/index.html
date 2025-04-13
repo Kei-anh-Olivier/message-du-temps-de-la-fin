@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accueil</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="public/images/favicon.ico" type="image/x-icon">
+
+    <style>
+            :root {
+            --main-bg: url("https://www.end-time-message.org/images/stories/photos/church_building/updated_building_pic0.jpg");
+            --nav-bg: url("https://www.end-time-message.org/images/stories/front_page/hoffman.jpg"); /* Image de fond pour la navigation */
+            --overlay-color: rgba(0, 0, 0, 0.3); /* Transparence augmentée */
+            --accent-color: #ffcc00;
+            --text-color-light: #ffffff;
+            --text-color-dark: #333;
+        }
+
+        body {
+            background: var(--main-bg) no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            color: var(--text-color-light);
+        }
+
+
+        header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            background: var(--nav-bg) no-repeat center center;
+            background-size: cover;
+            width: 100%;
+            padding: 8px 0; /* Réduction de l'épaisseur */
+        }
+
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.2); /* Transparence légère */
+            z-index: 1;
+        }
+
+        nav {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 5px 0;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 15px;
+        }
+
+        nav ul li a {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #fff;
+            padding: 10px 15px;
+            display: inline-block;
+            text-transform: uppercase;
+            transition: color 0.3s ease-in-out, text-shadow 0.3s ease-in-out;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-color);
+            text-shadow: 0px 0px 20px rgba(255, 204, 0, 1);
+        }
+
+        .header-buttons {
+            display: flex;
+            gap: 10px;
+            position: absolute;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            z-index: 2;
+        }
+
+        .link-button {
+            padding: 6px 12px;
+            border: 2px solid var(--text-color-light);
+            background-color: transparent;
+            color: var(--text-color-light);
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.9em;
+            font-weight: bold;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .link-button:hover {
+            background-color: var(--text-color-light);
+            color: var(--overlay-color);
+        }
+
+        main {
+            flex: 1;
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        .animated-text {
+            font-size: 3.5em;
+            font-weight: bold;
+            color: var(--accent-color);
+            margin: 60px 0 20px;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        main h3 {
+            font-size: 2em;
+            font-weight: 300;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        footer {
+            background-color: var(--overlay-color);
+            color: var(--text-color-light);
+            text-align: center;
+            padding: 20px;
+            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .animated-text {
+                font-size: 2.5em;
+            }
+
+            main h3 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Mon Site d'Évangélisation</h1>
+        <div class="header-buttons">
+            <a href="login.html" class="link-button">Se connecter</a>
+            <a href="signup.html" class="link-button">Créer un compte</a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html" data-tooltip="Bienvenue sur notre site">Accueil</a></li>
+                <li><a href="./a-propos.html" data-tooltip="Découvrez notre histoire">À propos</a></li>
+                <li><a href="preachings.html" data-tooltip="Enseignements et prédications">Prédications</a></li>
+                <li><a href="bible-verses.html" data-tooltip="Versets inspirants de la Bible">Versets Bibliques</a></li>
+                <li><a href="contact.html" data-tooltip="Contactez-nous facilement">Contact</a></li>
+              </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <h2 class="animated-text">Bienvenue sur mon site</h2>
+            <h3>Ceci est un site dédié à <strong>l'évangélisation et à l'enseignement biblique.</strong></h3>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 - Tous droits réservés</p>
+    </footer>
+
+</body>
+</html>

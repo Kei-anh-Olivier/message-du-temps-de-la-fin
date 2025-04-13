@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Définition du style global */
+        body {
+            background: linear-gradient(120deg, #89f7fe, #66a6ff);
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        header h1 {
+            text-align: center;
+            color: #fff;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        main {
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        /* Style des champs avec icônes */
+        .input-container {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .input-container input {
+            padding: 12px;
+            padding-left: 40px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+            width: 100%;
+            transition: box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        .input-container input:focus {
+            outline: none;
+            border-color: #007BFF;
+            box-shadow: 0 0 6px rgba(0, 123, 255, 0.5);
+        }
+
+        .input-container i {
+            position: absolute;
+            left: 12px;
+            color: #007BFF;
+            font-size: 1.2em;
+        }
+
+        /* Validation instantanée */
+        .error-message {
+            color: red;
+            font-size: 0.9em;
+            display: none;
+        }
+
+        .success-message {
+            color: green;
+            font-size: 0.9em;
+            display: none;
+        }
+
+        /* Bouton stylisé */
+        button {
+            padding: 12px;
+            background: linear-gradient(120deg, #28a745, #218838);
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        button:hover {
+            background: linear-gradient(120deg, #218838, #1e7e34);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Liens stylisés */
+        a {
+            display: block;
+            margin-top: 20px;
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            main {
+                padding: 20px;
+            }
+
+            input {
+                font-size: 1em;
+            }
+        }
+
+        .login-link {
+            font-size: 1em;
+            font-weight: bold;
+            color: #007BFF;
+            text-decoration: none;
+            display: block;
+            margin-top: 20px;
+            transition: color 0.3s ease;
+        }
+
+        .login-link:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+
+        .scrolling-quote {
+            position: sticky; /* Permet aux citations de rester visibles lorsqu'on fait défiler */
+            top: 10px; /* Crée un petit espace sous le haut de la page */
+            width: 100%;
+            background-color: var(--accent-color);
+            color: #fff;
+            font-size: 1.8em;
+            text-align: center;
+            font-family: 'Poppins', sans-serif;
+            padding: 10px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000; /* S'assure qu'elles restent au-dessus des autres éléments */
+        }
+
+
+        .scrolling-quote img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            margin: 0 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .scrolling-quote p {
+            display: inline-block;
+            white-space: normal;
+            text-align: center;
+            max-width: 80%;
+            line-height: 1.6;
+            opacity: 1;
+            transition: opacity 1s ease-in-out;
+            margin: 0 auto;
+        }
+        @keyframes move {
+            0%, 100% {
+                transform: translateY(-10px);
+            }
+            50% {
+                transform: translateY(10px);
+            }
+        }
+
+        .background-image-left, .background-image-right {
+            position: absolute;
+            top: 20%;
+            transform: translateY(-50%);
+            width: 500px;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            z-index: -1;
+            opacity: 0.2;
+            transition: transform 0.5s ease, opacity 0.5s ease;
+            animation: move 6s infinite alternate ease-in-out;
+        }
+
+        .background-image-left:hover, .background-image-right:hover {
+            transform: scale(1.1);
+            opacity: 0.3;
+        }
+
+        
+        .keyword {
+            font-weight: bold;
+            color: #FFD700; /* Couleur dorée pour les mots clés */
+        }
+
+        .highlight {
+            font-weight: bold;
+            color: orange; /* Accentuation avec une couleur vive */
+        }
+
+        footer {
+            background: #f8f9fa; /* Fond clair */
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+            color: #333;
+            margin-top: 40px; /* Ajoute de l’espace entre le formulaire et le footer */
+            width: 100%;
+        }
+
+        .footer-text {
+            font-size: 1em;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .footer-socials {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .footer-socials a {
+            font-size: 1.6em;
+            padding: 8px;
+            border-radius: 50%;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* Couleurs spécifiques */
+        .footer-socials a[href*="facebook.com"] { color: #1877F2; }
+        .footer-socials a[href*="twitter.com"] { color: #1DA1F2; }
+        .footer-socials a[href*="instagram.com"] { color: #E4405F; }
+        .footer-socials a[href*="wa.me"] { color: #25D366; }
+
+        /* Effet au survol */
+        .footer-socials a:hover {
+            transform: scale(1.2);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        header {
+            margin-bottom: 30px; /* Ajoute de l'espace sous le titre */
+        }
+
+    </style>
+    
+</head>
+<body>
+    <div class="scrolling-quote">
+        <img src="./images/aigleroyal.jpg" alt="Image gauche">
+        <p id="quote-text"></p>
+        <img src="./images/aigle.jpg" alt="Image droite">
+    </div>
+    <!-- Titre -->
+    <header>
+        <div class="quote-container">
+            <p id="quoteText"></p>
+        </div>
+    
+        <h1>Inscription</h1>
+    </header>
+
+    <!-- Contenu principal -->
+    <main>
+        <form action="/signup" method="post" id="signupForm">
+            <div class="input-container">
+                <i class="fa fa-user"></i>
+                <input type="text" name="fullname" placeholder="Nom complet" required aria-label="Nom complet"/>
+            </div>
+
+            <div class="input-container">
+                <i class="fa fa-envelope"></i>
+                <input type="email" name="email" placeholder="Email" required id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"/>
+                <div class="error-message" id="emailError">Format invalide !</div>
+            </div>
+
+            <div class="input-container">
+                <i class="fa fa-lock"></i>
+                <input type="password" name="password" placeholder="Mot de passe" required id="password" minlength="6"/>
+                <div class="error-message" id="passwordError">Minimum 6 caractères !</div>
+            </div>
+
+            <button type="submit">S'inscrire</button>
+
+            <a href="login.html" class="login-link">Déjà inscrit ? Connectez-vous ici</a>
+            <a href="index.html">Retour à l'accueil</a>
+            
+            <div class="success-message" id="successMessage">Inscription réussie ! Vous pouvez maintenant vous connecter.</div>
+        </form>
+    </main>
+    <footer>
+        <p class="footer-text">&copy; 2025 - Tous droits réservés</p>
+        <div class="footer-socials">
+            <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://wa.me/+2250546120379" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        </div>
+    </footer>
+    
+
+    <script>
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            let email = document.getElementById('email');
+            let password = document.getElementById('password');
+            let emailError = document.getElementById('emailError');
+            let passwordError = document.getElementById('passwordError');
+            let successMessage = document.getElementById('successMessage');
+
+            let valid = true;
+
+            // Validation Email
+            if (!email.value.match(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/)) {
+                emailError.style.display = "block";
+                valid = false;
+            } else {
+                emailError.style.display = "none";
+            }
+
+            // Validation Mot de passe
+            if (password.value.length < 6) {
+                passwordError.style.display = "block";
+                valid = false;
+            } else {
+                passwordError.style.display = "none";
+            }
+
+            // Affichage du message de succès si tout est bon
+            if (valid) {
+                successMessage.style.display = "block";
+            }
+        });
+
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            let success = true; // Simulation d'une inscription réussie
+
+            if (success) {
+                document.getElementById('successMessage').style.display = 'block';
+                setTimeout(() => {
+                    window.location.href = "/login"; // Redirection vers la page de connexion
+                }, 3000); // Attente de 3 secondes avant la redirection
+            } else {
+                document.getElementById('errorMessage').style.display = 'block';
+            }
+        });
+
+         // Citations inspirantes
+         const quotes = [
+    "“Aide-moi, <span class='highlight'><strong>Seigneur</strong></span>, à ne jamais faire des <span class='keyword'><strong>compromis</strong></span> sur la moindre parcelle de cette <span class='highlight'><strong>parole</strong></span>, mais à avancer avec <span class='keyword'><strong>l'amour divin</strong></span>” - <strong>William Marhion Branham</strong>",
+    "“<span class='highlight'><strong>Dieu</strong></span> garde toujours Sa <span class='keyword'><strong>Parole</strong></span> et agit selon Ses <span class='highlight'><strong>promesses</strong></span>” - <strong>William Marhion Branham</strong>",
+    "“La <span class='keyword'><strong>foi</strong></span> est basée sur la <span class='highlight'><strong>Parole de Dieu</strong></span>, et non sur ce que vous voyez” - <strong>William Marhion Branham</strong>",
+    "“Nous ne devons pas chercher à comprendre par notre intelligence, mais croire en la <span class='keyword'><strong>révélation</strong></span> divine” - <strong>William Marhion Branham</strong>",
+    "“Le véritable croyant s’appuie sur la <span class='highlight'><strong>Parole</strong></span>, et non sur les circonstances visibles” - <strong>William Marhion Branham</strong>",
+    "“Si vous croyez avec tout votre cœur, alors vous verrez la <span class='keyword'><strong>manifestation</strong></span> de Dieu” - <strong>William Marhion Branham</strong>",
+    "“Dieu ne regarde pas à votre passé, mais à votre <span class='highlight'><strong>foi</strong></span> et votre marche avec Lui aujourd’hui” - <strong>William Marrion Branham</strong>",
+    "“La <span class='highlight'><strong>prière</strong></span> sincère touche le cœur de Dieu et déclenche Sa puissance” - <strong>William Marhion Branham</strong>",
+    "“Ne vous appuyez pas sur votre propre <span class='keyword'><strong>compréhension</strong></span>, mais sur la <span class='highlight'><strong>direction</strong></span> de Dieu” - <strong>William Marhion Branham</strong>",
+    "“Dieu honore toujours Sa <span class='keyword'><strong>Parole</strong></span>. Ne la modifiez pas, croyez-la simplement.” - <strong>William Marhion Branham</strong>",
+    "“La <span class='highlight'><strong>promesse</strong></span> divine est une réalité, même si elle tarde, elle s’accomplira.” - <strong>William Marhion Branham</strong>",
+    "“Chaque jour avec <span class='highlight'><strong>Christ</strong></span> est un pas de plus vers l’éternité.” - <strong>William Marhion Branham</strong>",
+    "“Ce que Dieu a promis, Il l’accomplira en Son temps.” - <strong>William Marrion Branham</strong>",
+    "“Les bénédictions de Dieu suivent ceux qui Lui obéissent sans <span class='keyword'><strong>compromis</strong></span>.” - <strong>William Marhion Branham</strong>",
+    "“Marchez dans la <span class='highlight'><strong>lumière</strong></span> et vous ne trébucherez jamais.” - <strong>William Marhion Branham</strong>",
+    "“Quand Dieu donne une <span class='highlight'><strong>vision</strong></span>, Il ouvre aussi le chemin pour la réaliser.” - <strong>William Marhion Branham</strong>",
+    "“La puissance du <span class='keyword'><strong>Sang de Jésus</strong></span> nous garde et nous purifie.” - <strong>William Marhion Branham</strong>",
+    "“La vie sans la <span class='highlight'><strong>Parole</strong></span> est une vie sans fondement.” - <strong>William Marhion Branham</strong>",
+    "“Ne laissez jamais le <span class='keyword'><strong>doute</strong></span> entrer dans votre cœur, il détruit la <span class='highlight'><strong>foi</strong></span>.” - <strong>William Marhion Branham</strong>",
+    "“Tout ce que nous faisons doit être dirigé par l’<span class='highlight'><strong>Esprit de Dieu</strong></span>.” - <strong>William Marhion Branham</strong>",
+    "“Dieu a toujours un <span class='highlight'><strong>plan parfait</strong></span> pour ceux qui Lui font confiance.” - <strong>William Marhion Branham</strong>",
+    "“La <span class='keyword'><strong>vérité</strong></span> divine brille même dans les temps les plus sombres.” - <strong>William Marhion Branham</strong>",
+    "“Le véritable <span class='highlight'><strong>miracle</strong></span>, c’est la nouvelle naissance en <span class='keyword'><strong>Christ</strong></span>.” - <strong>William Marhion Branham</strong>",
+    "“Lorsque Dieu vous appelle, Il pourvoit à chaque besoin.” - <strong>William Marrion Branham</strong>",
+    "“La <span class='highlight'><strong>prière fervente</strong></span> du juste a une grande efficacité.” - <strong>William Marrion Branham</strong>",
+    "“Les grandes choses commencent toujours par une petite <span class='highlight'><strong>semence de foi</strong></span>.” - <strong>William Marhion Branham</strong>",
+    "“La <span class='highlight'><strong>foi</strong></span> est l’ingrédient principal pour une marche victorieuse avec Dieu.” - <strong>William Marhion Branham</strong>",
+    "“Ne suivez jamais la foule, suivez la <span class='highlight'><strong>voix de Dieu</strong></span>.” - <strong>William Marhion Branham</strong>",
+    "“Le véritable croyant vit par chaque <span class='highlight'><strong>Parole</strong></span> qui sort de la bouche de Dieu.” - <strong>William Marhion Branham</strong>"
+];
+
+
+
+        let currentIndex = 0;
+
+        function displayNextQuote() {
+            const quoteElement = document.querySelector('.scrolling-quote p');
+            quoteElement.style.opacity = 0;
+            setTimeout(() => {
+                currentIndex = (currentIndex + 1) % quotes.length;
+                quoteElement.innerHTML = quotes[currentIndex];
+                quoteElement.style.opacity = 1;
+            }, 1000);
+        }
+
+        setInterval(displayNextQuote, 10000);
+        displayNextQuote();
+    </script>
+    
+    
+</body>
+</html>
+
+
+

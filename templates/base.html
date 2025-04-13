@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Site Web</title>
+
+    <!-- Lien vers le favicon -->
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    
+    <!-- Autres liens ou fichiers CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- Contenu de ton site web -->
+    <header>
+        <h1>Bienvenue sur mon site web</h1>
+    </header>
+
+    <!-- Le reste de ton contenu va ici -->
+    {% block content %}
+    {% endblock %}
+</body>
+</html>
