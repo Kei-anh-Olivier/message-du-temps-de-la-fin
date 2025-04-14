@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page non trouvée</title>
+    <link rel="stylesheet" href="styles/404.css"> <!-- Lien vers un CSS optionnel -->
+</head>
+<body>
+
+    <!-- Inclure l'en-tête -->
+    <header>
+        <nav class="navbar">
+            <button class="menu-toggle" onclick="toggleMenu()">&#9776;</button> <!-- Icône du menu burger -->
+            <ul class="nav-links">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="a-propos.html">À propos</a></li>
+                <li><a href="preachings.html">Prédications</a></li>
+                <li><a href="bible-verses.html">Versets Bibliques</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="login.html">Connexion</a></li>
+                <li><a href="signup.html">Inscription</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1>Erreur 404 - Page non trouvée</h1>
+        <p>Désolé, la page que vous recherchez n'existe pas.</p>
+        <a href="index.html" class="home-link">Retour à la page d'accueil</a>
+    </div>
+
+    <!-- Inclure le pied de page -->
+    <footer>
+        <div class="footer-container">
+            <!-- Section des liens rapides -->
+            <ul class="footer-links">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="a-propos.html">À propos</a></li>
+                <li><a href="preachings.html">Prédications</a></li>
+                <li><a href="bible-verses.html">Versets Bibliques</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+
+            <!-- Section du texte copyright -->
+            <p class="footer-text">&copy; 2025 - Tous droits réservés</p>
+
+            <!-- Icônes des réseaux sociaux -->
+            <div class="footer-socials">
+                <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script pour le menu responsive -->
+    <script>
+        function toggleMenu() {
+            const navLinks = document.querySelector(".nav-links");
+            navLinks.classList.toggle("active");
+        }
+    </script>
+
+</body>
+</html>

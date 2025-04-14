@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Ajouter une Prédication</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --main-bg: linear-gradient(135deg, #1abc9c, #16a085);
+            --text-color: #333;
+            --accent-color: #007BFF;
+            --shadow-color: rgba(0, 0, 0, 0.15);
+            --form-bg: #ffffff;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+            color: var(--text-color);
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 30px;
+            background: var(--form-bg);
+            border-radius: 12px;
+            box-shadow: 0 6px 12px var(--shadow-color);
+            border: none;
+        }
+
+        .form-container h1 {
+            text-align: center;
+            color: #1abc9c;
+        }
+
+        .form-container label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        .form-container input,
+        .form-container textarea,
+        .form-container button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 8px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        .form-container textarea {
+            resize: none;
+        }
+
+        .form-container button {
+            background: var(--accent-color);
+            color: #fff;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .form-container button:hover {
+            background: #0056b3;
+        }
+
+        /* Responsiveness */
+        @media (max-width: 768px) {
+            .form-container {
+                padding: 20px;
+            }
+
+            .form-container h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+    
+</head>
+<body>
+    <!-- Inclure l'en-tête -->
+    <header>
+        <nav class="navbar">
+            <button class="menu-toggle" onclick="toggleMenu()">&#9776;</button>
+            <ul class="nav-links">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="a-propos.html">À propos</a></li>
+                <li><a href="preachings.html">Prédications</a></li>
+                <li><a href="bible-verses.html">Versets Bibliques</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="login.html">Connexion</a></li>
+                <li><a href="signup.html">Inscription</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="form-container">
+        <h1>Ajouter une Prédication</h1>
+        <form action="/admin/preaching/add" method="POST" enctype="multipart/form-data">
+            <label for="title">Titre :</label>
+            <input type="text" id="title" name="title" placeholder="Titre de la prédication" required>
+
+            <label for="description">Description :</label>
+            <textarea id="description" name="description" placeholder="Résumé de la prédication" rows="5" required></textarea>
+
+            <label for="image">Image (URL) :</label>
+            <input type="text" id="image" name="image" placeholder="Lien de l'image" required>
+
+            <label for="audio">Fichier audio :</label>
+            <input type="file" id="audio" name="file" accept="audio/*" required>
+
+            <button type="submit">Ajouter la prédication</button>
+        </form>
+    </div>
+
+    <!-- Inclure le pied de page -->
+    <footer>
+        <div class="footer-container">
+            <ul class="footer-links">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="a-propos.html">À propos</a></li>
+                <li><a href="preachings.html">Prédications</a></li>
+                <li><a href="bible-verses.html">Versets Bibliques</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <p class="footer-text">&copy; 2025 - Tous droits réservés</p>
+            <div class="footer-socials">
+                <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const navLinks = document.querySelector(".nav-links");
+            navLinks.classList.toggle("active");
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Définition du style global */
+        body {
+            background: linear-gradient(120deg, #89f7fe, #66a6ff);
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        header h1 {
+            text-align: center;
+            color: #fff;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        main {
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        /* Style des champs avec icônes */
+        .input-container {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .input-container input {
+            padding: 12px;
+            padding-left: 40px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+            width: 100%;
+            transition: box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        .input-container input:focus {
+            outline: none;
+            border-color: #007BFF;
+            box-shadow: 0 0 6px rgba(0, 123, 255, 0.5);
+        }
+
+        .input-container i {
+            position: absolute;
+            left: 12px;
+            color: #007BFF;
+            font-size: 1.2em;
+        }
+
+        /* Validation instantanée */
+        .error-message {
+            color: red;
+            font-size: 0.9em;
+            display: none;
+        }
+
+        .success-message {
+            color: green;
+            font-size: 0.9em;
+            display: none;
+        }
+
+        /* Bouton stylisé */
+        button {
+            padding: 12px;
+            background: linear-gradient(120deg, #28a745, #218838);
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        button:hover {
+            background: linear-gradient(120deg, #218838, #1e7e34);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Liens stylisés */
+        a {
+            display: block;
+            margin-top: 20px;
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            main {
+                padding: 20px;
+            }
+
+            input {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Inscription</h1>
+    </header>
+
+    <main>
+        <form action="/register" method="post" id="registerForm">
+            <div class="input-container">
+                <i class="fa fa-user"></i>
+                <input type="text" name="lastname" placeholder="Nom" required />
+            </div>
+
+            <div class="input-container">
+                <i class="fa fa-user"></i>
+                <input type="text" name="firstname" placeholder="Prénom" required />
+            </div>
+
+            <div class="input-container">
+                <i class="fa fa-calendar"></i>
+                <input type="date" name="birthdate" required />
+            </div>
+
+            <div class="input-container">
+                <i class="fa fa-map-marker-alt"></i>
+                <input type="text" name="birthplace" placeholder="Lieu de naissance" required />
+            </div>
+
+            <div class="input-container">
+                <i class="fa fa-envelope"></i>
+                <input type="email" name="email" placeholder="Email" required id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" />
+                <div class="error-message" id="emailError">Format invalide !</div>
+            </div>
+
+            <div class="input-container">
+                <i class="fa fa-lock"></i>
+                <input type="password" name="password" placeholder="Mot de passe" required id="password" minlength="6"/>
+                <div class="error-message" id="passwordError">Minimum 6 caractères !</div>
+            </div>
+
+            <button type="submit">S'inscrire</button>
+
+            <a href="login.html">Déjà inscrit ? Connectez-vous ici</a>
+            <a href="index.html">Retour à l'accueil</a>
+
+            <div class="success-message" id="successMessage">Inscription réussie ! Vous pouvez maintenant vous connecter.</div>
+        </form>
+    </main>
+
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            let email = document.getElementById('email');
+            let password = document.getElementById('password');
+            let emailError = document.getElementById('emailError');
+            let passwordError = document.getElementById('passwordError');
+            let successMessage = document.getElementById('successMessage');
+
+            let valid = true;
+
+            // Validation Email
+            if (!email.value.match(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/)) {
+                emailError.style.display = "block";
+                valid = false;
+            } else {
+                emailError.style.display = "none";
+            }
+
+            // Validation Mot de passe
+            if (password.value.length < 6) {
+                passwordError.style.display = "block";
+                valid = false;
+            } else {
+                passwordError.style.display = "none";
+            }
+
+            // Affichage du message de succès si tout est bon
+            if (valid) {
+                successMessage.style.display = "block";
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
